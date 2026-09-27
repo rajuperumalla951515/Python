@@ -123,3 +123,59 @@ def fibonacci_series(num):
     return sequence
 
 print("Fibonacci:", fibonacci_series(8))
+
+# Armstrong Number Check
+# Check if a number is an Armstrong number (sum of digits raised to the power of number of digits)
+n = 153  # Example input (uncomment below for user input)
+# n = int(input("Enter Num: "))
+
+original = n
+nod = len(str(n))
+
+result = 0
+
+while n > 0:
+    ld = n % 10
+    result = result + (ld ** nod)
+    n = n // 10
+
+print("Armstrong Sum Result:", result)
+
+if result == original:
+    print("Is Armstrong Number: Yes")
+else:
+    print("Is Armstrong Number: No")
+
+
+# Find Divisors / Factors of a Number
+# Find all positive factors of a given integer
+n = 12  # Example input (uncomment below for user input)
+# n = int(input("Enter Num: "))
+result = []
+
+for i in range(1, n // 2 + 1):
+    if n % i == 0:
+        result.append(i)
+
+result.append(n)
+
+print("Factors of number:", result)
+
+
+# Palindrome Number Check
+# Check if an integer is a palindrome by reversing its digits
+class Solution(object):
+    def isPalindrome(self, x):
+        num = x
+        result = 0
+
+        while num > 0:
+            ld = num % 10
+            result = (result * 10) + ld
+            num = num // 10
+
+        return result == x
+
+s1 = Solution()
+print("Is Palindrome (-242):", s1.isPalindrome(-242))
+
