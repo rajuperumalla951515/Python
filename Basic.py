@@ -188,3 +188,47 @@ class Solution(object):
 s1 = Solution()
 print("Is Palindrome (-242):", s1.isPalindrome(-242))
 
+
+# Hashing & Frequency Counting Concepts
+
+# 1. Frequency Counting using Dictionary (Hash Map)
+# Count occurrences of each number in a list using a Python dictionary
+nums = [1, 56, 4, 8, 56, 4, 8, 3, 1, 1, 111, 46, 48, 6]
+dic = {}
+for num in nums:
+    dic[num] = dic.get(num, 0) + 1
+print("Frequency Dictionary:", dic)
+
+
+# 2. Element Frequency Querying using Array Hashing
+# Precompute element frequencies in a fixed-size array to quickly answer frequency queries
+n = [5, 3, 2, 2, 1, 5, 5, 7, 5, 10]
+m = [10, 111, 1, 9, 5, 67, 2]
+
+hash_dict = [0] * 11
+
+# Count frequencies
+for num in n:
+    hash_dict[num] += 1
+
+# Answer queries
+print("Frequency Queries Output:")
+for x in m:
+    if x < 1 or x > 10:
+        print(0)
+    else:
+        print(hash_dict[x])
+
+
+# 3. Find First Duplicate / Repeating Element using Array Hashing
+# Identify the first number in the list that appears more than once
+nums_dup = [3, 1, 3, 2, 5, 3, 2, 1, 3, 5, 5, 5]
+hash_arr = [0] * 13
+
+for num in nums_dup:
+    hash_arr[num] += 1
+    if hash_arr[num] > 1:
+        print("First Duplicate Element:", num)
+        break
+
+
