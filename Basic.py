@@ -147,19 +147,28 @@ else:
     print("Is Armstrong Number: No")
 
 
-# Find Divisors / Factors of a Number
+# Find Divisors / Factors of a Number (Optimized O(sqrt(N)) Class approach)
 # Find all positive factors of a given integer
-n = 12  # Example input (uncomment below for user input)
-# n = int(input("Enter Num: "))
-result = []
+from math import sqrt
 
-for i in range(1, n // 2 + 1):
-    if n % i == 0:
-        result.append(i)
+class Factors:
+    def factorsOfnumbers(self, n):
+        num = n
+        result = []
+        s = int(sqrt(num))
+        
+        for i in range(1, s + 1):
+            if num % i == 0:
+                result.append(i)
+                if num // i != i:
+                    result.append(num // i)
 
-result.append(n)
+        result.sort()
+        return result
 
-print("Factors of number:", result)
+s1 = Factors()
+print("Factors of 36:", s1.factorsOfnumbers(36))
+
 
 
 # Palindrome Number Check
