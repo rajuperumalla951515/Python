@@ -255,4 +255,26 @@ sorted_list = bubble_sort(sample_list.copy())
 print("Sorted List (Bubble Sort):", sorted_list)
 
 
+# Selection Sort Algorithm
+# Selection Sort repeatedly selects the smallest element from the unsorted portion and swaps it into the sorted portion.
+# Time Complexity: O(N^2) for all cases (best, average, worst)
+# Space Complexity: O(1) auxiliary space
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+sample_list_selection = [64, 25, 12, 22, 11]
+print("Original List for Selection Sort:", sample_list_selection)
+sorted_list_selection = selection_sort(sample_list_selection.copy())
+print("Sorted List (Selection Sort):", sorted_list_selection)
+
+
+
 

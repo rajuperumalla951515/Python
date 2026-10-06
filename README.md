@@ -25,10 +25,11 @@ This repository contains Python programs and exercises designed for learning and
 - Palindrome Number Check
 - Hashing & Frequency Counting (Dictionary & Array Hashing)
 - Bubble Sort Algorithm
+- Selection Sort Algorithm
 
 ## Files in This Repository
 
-- Basic.py: covers Python fundamentals, beginner definitions, and basic algorithms (including Bubble Sort)
+- Basic.py: covers Python fundamentals, beginner definitions, and basic algorithms (including Bubble Sort and Selection Sort)
 - OOPS.py: includes basic OOP programs and examples
 - README.md: project overview and learning roadmap
 
@@ -47,7 +48,7 @@ This repository contains Python programs and exercises designed for learning and
 
 ## Topics Status
 
-- Completed: Variables, Data Types, Operators, Loops, Functions, Lists, Dictionaries, Classes, Hashing & Frequency Counting, Bubble Sort, and basic OOP
+- Completed: Variables, Data Types, Operators, Loops, Functions, Lists, Dictionaries, Classes, Hashing & Frequency Counting, Bubble Sort, Selection Sort, and basic OOP
 - In Progress: More OOP practice and real-world algorithm examples
 - Upcoming: Inheritance, Encapsulation, Polymorphism, File Handling, and advanced projects
 
