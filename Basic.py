@@ -232,3 +232,27 @@ for num in nums_dup:
         break
 
 
+# Bubble Sort Algorithm
+# Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
+# Time Complexity: O(N^2) worst/average case, O(N) best case (with optimization flag)
+# Space Complexity: O(1)
+
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        if not swapped:
+            break
+    return arr
+
+sample_list = [64, 34, 25, 12, 22, 11, 90]
+print("Original List for Bubble Sort:", sample_list)
+sorted_list = bubble_sort(sample_list.copy())
+print("Sorted List (Bubble Sort):", sorted_list)
+
+
+
