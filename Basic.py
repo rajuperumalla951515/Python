@@ -232,10 +232,96 @@ for num in nums_dup:
         break
 
 
-# Bubble Sort Algorithm
-# Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
-# Time Complexity: O(N^2) worst/average case, O(N) best case (with optimization flag)
-# Space Complexity: O(1)
+# 4. Character Hashing (Fixed-size Array Hashing)
+# Count character occurrences in O(N) time and O(1) auxiliary space
+word = "antigravitypython"
+char_hash = [0] * 26
+for ch in word:
+    char_hash[ord(ch) - ord('a')] += 1
+print("Character Frequency for 't':", char_hash[ord('t') - ord('a')])
+
+
+# 5. Highest and Lowest Frequency Elements in O(N) Time
+# Find elements with max and min occurrences using a hash map
+items = [1, 56, 4, 8, 56, 4, 8, 3, 1, 1, 111, 46, 48, 6]
+freq_map = {}
+for x in items:
+    freq_map[x] = freq_map.get(x, 0) + 1
+
+max_elem, max_freq = items[0], 0
+min_elem, min_freq = items[0], float("inf")
+for k, v in freq_map.items():
+    if v > max_freq:
+        max_freq, max_elem = v, k
+    if v < min_freq:
+        min_freq, min_elem = v, k
+print(f"Highest Frequency Element: {max_elem} (count: {max_freq})")
+print(f"Lowest Frequency Element: {min_elem} (count: {min_freq})")
+
+
+# 6. Two Sum Problem (Optimal Hash Map Solution - O(N) Time, O(N) Space)
+# Find two indices whose values sum up to the target
+def two_sum(nums, target):
+    seen = {}
+    for idx, num in enumerate(nums):
+        diff = target - num
+        if diff in seen:
+            return [seen[diff], idx]
+        seen[num] = idx
+    return []
+
+print("Two Sum Indices [2, 7, 11, 15] target=9:", two_sum([2, 7, 11, 15], 9))
+
+
+# 7. Longest Subarray with Sum K (Optimal Prefix Sum + Hash Map - O(N) Time)
+def longest_subarray_sum_k(arr, k):
+    prefix_map = {}
+    curr_sum = 0
+    max_len = 0
+    for i, num in enumerate(arr):
+        curr_sum += num
+        if curr_sum == k:
+            max_len = i + 1
+        rem = curr_sum - k
+        if rem in prefix_map:
+            max_len = max(max_len, i - prefix_map[rem])
+        if curr_sum not in prefix_map:
+            prefix_map[curr_sum] = i
+    return max_len
+
+print("Longest Subarray with Sum 15 in [10, 5, 2, 7, 1, 9]:", longest_subarray_sum_k([10, 5, 2, 7, 1, 9], 15))
+
+
+# =====================================================================
+# All 5 Classic Sorting Algorithms (Optimal Implementations)
+# =====================================================================
+
+# 1. Selection Sort Algorithm
+# Selection Sort repeatedly selects the smallest element from the unsorted portion and swaps it into the sorted portion.
+# Time Complexity: O(N^2) for all cases (best, average, worst)
+# Space Complexity: O(1) auxiliary space (In-place)
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+sample_list_selection = [64, 25, 12, 22, 11]
+print("Original List for Selection Sort:", sample_list_selection)
+sorted_list_selection = selection_sort(sample_list_selection.copy())
+print("Sorted List (Selection Sort):", sorted_list_selection)
+
+
+# 2. Bubble Sort Algorithm (Optimized)
+# Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if in wrong order.
+# Optimal: With swapped flag, terminates in O(N) if already sorted.
+# Time Complexity: O(N) best case, O(N^2) worst/average case
+# Space Complexity: O(1) auxiliary space (In-place, Stable)
 
 def bubble_sort(arr):
     n = len(arr)
@@ -255,25 +341,97 @@ sorted_list = bubble_sort(sample_list.copy())
 print("Sorted List (Bubble Sort):", sorted_list)
 
 
-# Selection Sort Algorithm
-# Selection Sort repeatedly selects the smallest element from the unsorted portion and swaps it into the sorted portion.
-# Time Complexity: O(N^2) for all cases (best, average, worst)
-# Space Complexity: O(1) auxiliary space
+# 3. Insertion Sort Algorithm (Optimized)
+# Builds sorted array one item at a time by shifting larger elements to the right.
+# Time Complexity: O(N) best case (already sorted), O(N^2) worst/average case
+# Space Complexity: O(1) auxiliary space (In-place, Stable)
 
-def selection_sort(arr):
+def insertion_sort(arr):
     n = len(arr)
-    for i in range(n):
-        min_idx = i
-        for j in range(i + 1, n):
-            if arr[j] < arr[min_idx]:
-                min_idx = j
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    for i in range(1, n):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
     return arr
 
-sample_list_selection = [64, 25, 12, 22, 11]
-print("Original List for Selection Sort:", sample_list_selection)
-sorted_list_selection = selection_sort(sample_list_selection.copy())
-print("Sorted List (Selection Sort):", sorted_list_selection)
+sample_list_insertion = [12, 11, 13, 5, 6]
+print("Original List for Insertion Sort:", sample_list_insertion)
+sorted_list_insertion = insertion_sort(sample_list_insertion.copy())
+print("Sorted List (Insertion Sort):", sorted_list_insertion)
+
+
+# 4. Merge Sort Algorithm (Divide and Conquer)
+# Divides the array into two halves, recursively sorts them, and merges the sorted halves.
+# Time Complexity: O(N log N) in all cases (best, average, worst)
+# Space Complexity: O(N) auxiliary space (Stable)
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    
+    # Merge sorted halves
+    merged = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            merged.append(left[i])
+            i += 1
+        else:
+            merged.append(right[j])
+            j += 1
+    merged.extend(left[i:])
+    merged.extend(right[j:])
+    return merged
+
+sample_list_merge = [38, 27, 43, 3, 9, 82, 10]
+print("Original List for Merge Sort:", sample_list_merge)
+sorted_list_merge = merge_sort(sample_list_merge.copy())
+print("Sorted List (Merge Sort):", sorted_list_merge)
+
+
+# 5. Quick Sort Algorithm (Divide and Conquer with Partitioning)
+# Picks a pivot element and partitions array so elements <= pivot are left, and > pivot are right.
+# Time Complexity: O(N log N) average/best case, O(N^2) worst case (mitigated with median pivot)
+# Space Complexity: O(log N) recursion stack space (In-place)
+
+def quick_sort(arr, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
+    if low < high:
+        # Median-of-three pivot selection for optimal partitioning
+        mid = (low + high) // 2
+        if arr[low] > arr[mid]:
+            arr[low], arr[mid] = arr[mid], arr[low]
+        if arr[low] > arr[high]:
+            arr[low], arr[high] = arr[high], arr[low]
+        if arr[mid] > arr[high]:
+            arr[mid], arr[high] = arr[high], arr[mid]
+        arr[mid], arr[high] = arr[high], arr[mid]
+
+        pivot = arr[high]
+        i = low - 1
+        for j in range(low, high):
+            if arr[j] <= pivot:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        pivot_idx = i + 1
+
+        quick_sort(arr, low, pivot_idx - 1)
+        quick_sort(arr, pivot_idx + 1, high)
+    return arr
+
+sample_list_quick = [10, 7, 8, 9, 1, 5]
+print("Original List for Quick Sort:", sample_list_quick)
+sorted_list_quick = quick_sort(sample_list_quick.copy())
+print("Sorted List (Quick Sort):", sorted_list_quick)
+
 
 
 
